@@ -63,7 +63,21 @@
   </footer>
 
   <script>
-  
+    registerSW(); setupThemeToggle();
+
+    function loginAs(role) {
+      try {
+        if (role === 'doctor') {
+          const rmp = prompt("Enter RMP Registration # (optional):");
+          if (rmp) localStorage.setItem('rmpRegNo', rmp.trim());
+        }
+        window.Auth.signInWithRole(role);
+        location.href = 'dashboard.html';
+      } catch (e) {
+        console.error(e);
+        toast('Login failed','error');
+      }
+    }
   </script>
 <footer class="fixed-footer">
   Powered by Onestop AI Services. All rights reserved.

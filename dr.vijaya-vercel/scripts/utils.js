@@ -19,9 +19,3 @@ function watermarkCss(){return `body::before{content:"Sex not disclosed";positio
   m.innerHTML=`<div style="max-width:520px;background:#fff;color:#111;border-radius:16px;padding:16px"><h3>Consent</h3><p>This app stores limited personal data locally for clinical care & compliance (DPDP 2023). By continuing you consent to data processing; retention is configurable in Settings.</p><div style="display:flex;gap:8px;justify-content:flex-end"><button id="cDecl" class="btn">Decline</button><button id="cAcc" class="btn primary">I Consent</button></div></div>`;
   document.addEventListener('DOMContentLoaded',()=>{document.body.appendChild(m);document.getElementById('cAcc').onclick=()=>{localStorage.setItem('dpdpConsent','1');m.remove();};document.getElementById('cDecl').onclick=()=>{alert('Consent required');location.href='about:blank';};});
 })();
-// Disable consent gate per request
-window.ensureConsentGate = function () {
-  // Mark as accepted so any checks pass silently
-  localStorage.setItem('dpdpConsent', '1');
-  return true;
-};

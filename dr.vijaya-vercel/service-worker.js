@@ -1,4 +1,4 @@
-const CACHE='fmc-v8';
+const CACHE='fmc-v2';
 const ASSETS=['/','/index.html','/dashboard.html','/bookings.html','/scan.html','/counseling.html','/procedures.html','/compliance.html','/admin.html','/settings.html','/billing.html','/scripts/billing.js','/styles/styles.css','/scripts/utils.js','/scripts/auth.js','/scripts/db.js','/scripts/models.js','/scripts/reports.js','/scripts/pcpndt.js','/scripts/calc.js','/scripts/counseling.js','/scripts/telemed.js','/manifest.webmanifest','/assets/logo.png','/assets/banner.png'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(CACHE).then(c=>c.addAll(ASSETS)));self.skipWaiting();});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k)))));self.clients.claim();});

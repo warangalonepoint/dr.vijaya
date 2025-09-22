@@ -23,11 +23,18 @@ window.Auth = (() => {
     admin:     ['admin'],
     settings:  ['admin','doctor']
   };
-function showRoleBadge() {
-  const s = current(); if (!s) return;
-  const el = document.getElementById('roleBadge');
-  if (el) el.textContent = ROLE_LABEL[s.role];
-}
+
+  function signInWithRole(role) {
+    if (!ROLE_LABEL[role]) throw new Error('Unknown role');
+    const profile = {
+      role,
+      name: ROLE_LABEL[role],
+      rmpRegNo: role === 'doctor' ? (localStorage.getItem('rmpRegNo') || '') : '',
+      at: Date.now()
+    };
+    localStorage.setItem(SESSION, JSON.stringify(profile));
+    return true;
+  }
 
   function current() {
     const s = localStorage.getItem(SESSION);
