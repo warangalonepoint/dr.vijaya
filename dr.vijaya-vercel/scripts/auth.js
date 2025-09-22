@@ -23,7 +23,11 @@ window.Auth = (() => {
     admin:     ['admin'],
     settings:  ['admin','doctor']
   };
-
+function showRoleBadge() {
+  const s = current(); if (!s) return;
+  const el = document.getElementById('roleBadge');
+  if (el) el.textContent = ROLE_LABEL[s.role];
+}
 
   function current() {
     const s = localStorage.getItem(SESSION);
